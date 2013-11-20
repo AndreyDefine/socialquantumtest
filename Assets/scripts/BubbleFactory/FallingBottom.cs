@@ -10,11 +10,13 @@ using System.Collections;
 public class FallingBottom : AbstractTag,TouchTargetedDelegate {
 	
 	public Vector3 movingBottomVector=new Vector3(0,0,0);
+	public Vector3 movingRotation=new Vector3(0,0,0);
 	public float yPositionToRestart=0;
-	public bool _flagIsActive=false;
 	public int score=0;
 	public TextureFactory TextureFactory1;
 	
+	//флаг свойство - активный элемент, не активный элемент
+	public bool _flagIsActive=false;
 	public bool flagIsActive {
         get {
             return _flagIsActive;
@@ -63,11 +65,16 @@ public class FallingBottom : AbstractTag,TouchTargetedDelegate {
 		singleTransform.position=new Vector3(-9999,-9999,-9999);
 	}
 	
+	//равномерное вращение
+	void MoveRotation()
+	{
+		singleTransform.Rotate(movingRotation);
+	}
 	
 	//равномерное поступательное движение вниз
 	void MoveBottom()
 	{
-		singleTransform.Translate(movingBottomVector);
+		singleTransform.Translate(movingBottomVector, Space.World);
 		if(singleTransform.position.y<=yPositionToRestart)
 		{
 			flagIsActive=false;
@@ -78,6 +85,7 @@ public class FallingBottom : AbstractTag,TouchTargetedDelegate {
 	void Update () {
 		if(!flagIsActive) return;
 		MoveBottom();
+		MoveRotation();
 	}
 	
 	//TouchDelegateMethods

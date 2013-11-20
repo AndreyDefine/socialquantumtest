@@ -88,10 +88,13 @@ public class GameAgent : Abstract {
 			FallingBottom newFallingBottom=newObject.GetComponent<FallingBottom>();
 			float newscale=UnityEngine.Random.Range(minscale,maxscale);
 			float newfalling=GlobalOptions.difficultyLevel*0.05f/newscale;
+			float newrotation=UnityEngine.Random.Range(1f,4f)*(UnityEngine.Random.Range(0,2)>0?1:-1);
+			
 			float newscore=(10f*GlobalOptions.difficultyLevel)/newscale;
 			//задаём параметры
 			newFallingBottom.singleTransform.localScale=new Vector3(newscale,newscale,newscale);
 			newFallingBottom.movingBottomVector=new Vector3(0,-newfalling,0);
+			newFallingBottom.movingRotation=new Vector3(0,0,newrotation);
 			newFallingBottom.score=(int)newscore;
 			
 			int indexOfTextureScale=(int)((newscale-minscale)/((maxscale-minscale)/4f));
