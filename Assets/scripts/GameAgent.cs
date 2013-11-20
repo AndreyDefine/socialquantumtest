@@ -19,6 +19,7 @@ public class GameAgent : Abstract {
 	
 	private static GameAgent instance=null;
 			
+	//получить singleton
 	public static GameAgent GetSharedGameAgent()
 	{
 		return instance;	
@@ -118,7 +119,7 @@ public class GameAgent : Abstract {
 		if(!flagRun)
 			return;
 		//нужно ли добавлять шарик
-		if(Time.time-timePassed>=1f/GlobalOptions.difficultyLevel)
+		if(Time.time-timePassed>=3f)
 		{
 			//сбросили счётчик
 			timePassed=Time.time;

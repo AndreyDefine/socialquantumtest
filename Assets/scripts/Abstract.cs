@@ -7,8 +7,8 @@ using System.Collections;
 /// </summary>
 public class Abstract : MonoBehaviour {
 
+	//трансформ
 	private Transform _singleTransform = null;
-	private Renderer _singleRenderer = null;
 	
     public Transform singleTransform {
         get {
@@ -19,6 +19,8 @@ public class Abstract : MonoBehaviour {
         }
     }
 	
+	//renderer
+	private Renderer _singleRenderer = null;
     public Renderer singleRenderer {
         get {
             return _singleRenderer;
@@ -28,6 +30,7 @@ public class Abstract : MonoBehaviour {
         }
     }
 	
+	//здесь задаются кешируемые параметры, иначе могут быть глюки
 	public virtual void Awake(){
 		singleTransform = transform;
 		singleRenderer = renderer;

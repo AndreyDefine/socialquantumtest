@@ -6,29 +6,40 @@ using System.Collections.Generic;
 
 //делегаты для работы с фабрикой объектов
 public delegate void ObjectLoadedCallbackDelegate(GameObject newObject,string instr);
+//делегат передаваемый Caching Load
 public delegate void ObjectLoadedCallbackDelegateWithCustomCallBack(AssetBundle bundle,string instr,ObjectLoadedCallbackDelegate callback);
 
 /// <summary>
 /// Фабрика объектов с загрузкой через Asset Bundles
 /// Pool объектов, для их переиспользования
+/// В связи с тем, что загрузка одного и того же Bundle валится с ошибками 
+/// (нельзя грузить один и тот же одновременно), 
+/// необходимо сначала сделать предзагрузку пула, а потом уже производить с ним работу
 /// </summary>
 
 public class AbstractElementFactory: Abstract{
+	//путь к AssetBundle.unity3d
 	public string pathToResources="";
+	//через запятую перечисленные имена объектов
 	public string preloadNames="";
 	
+	//распарсеный список предзагрузки
 	private string []objectPreload=null;
 	
+	//список используемых вещей
 	protected List<AbstractTag> objectsList = new List<AbstractTag>();
+	//список вещей в свободном пуле
 	protected List<AbstractTag> objectsListToDel = new List<AbstractTag>();
 	
-	void Start(){	
+	void Start(){
+		//предзагрузить имена вещей в пуле
 		if(preloadNames!="")
 		{
 			parseObjectsNames();
 		}
 	}
 	
+	//Распарсить спикок объетков из строки
 	public void parseObjectsNames()
 	{
 		//получили массив объектов
@@ -53,13 +64,15 @@ public class AbstractElementFactory: Abstract{
 		objectsList.Clear();
 	}
 	
-	
+	//удалить указанный
 	public void DeleteCurrent(AbstractTag inObject){
 		objectsList.Remove(inObject);			
 		objectsListToDel.Add(inObject);
 	}
 	
+	//поместить объект в первоначальные установки
 	public virtual void PutToFirstState(AbstractTag newObject){
+		//far from camera, unity recomends this
 		newObject.singleTransform.position=new Vector3(-9999,-9999,-9999);
 		newObject.singleTransform.rotation=Quaternion.identity;
 	}
@@ -78,6 +91,7 @@ public class AbstractElementFactory: Abstract{
 		GetNewObjectWithName(objectname,callback);
 	}
 	
+	//Уничтожить все объекты в пуле
 	public virtual void DestroyPoolObjects()
 	{
 		AbstractTag newObject=null;
@@ -107,6 +121,7 @@ public class AbstractElementFactory: Abstract{
 
 	}
 	
+	//получить объект по имени
 	public virtual void GetNewObjectWithName(string instr,ObjectLoadedCallbackDelegate callback){
 		GameObject newObject=null;
 		int i;
@@ -166,6 +181,7 @@ public class AbstractElementFactory: Abstract{
 		}
 	}
 	
+	//загрузка объекта из бандла
 	private void LoadObjectWWW(string instr,ObjectLoadedCallbackDelegateWithCustomCallBack callback, ObjectLoadedCallbackDelegate customcallback){
 		GameObject newWWWRequest= new GameObject();
 		newWWWRequest.name="newWWWRequest";
@@ -224,6 +240,7 @@ public class AbstractElementFactory: Abstract{
 		}
 		if(newObject==null)
 		{
+			//much better than exeption, not critical error
 			Debug.Log ("NUUUUUUUUUUUUUL factory="+name+"name= "+instr);
 		}
 		customcallback(newObject,instr);

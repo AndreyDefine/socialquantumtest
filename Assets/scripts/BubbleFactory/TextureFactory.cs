@@ -10,13 +10,15 @@ using System.Collections.Generic;
 public class TextureFactory: Abstract{	
 	protected List<Material> objectsList = new List<Material>();
 	private int []arrayOfSizes={32,64,128,256};
-
+	
+	//delete object
 	public void DeleteCurrent(Material inObject){
 		objectsList.Remove(inObject);
 		DestroyImmediate(inObject.mainTexture);
 		inObject.mainTexture=null;
 	}
 	
+	//delete from memory all textures, and clean list of materials
 	public void DestroyAll()
 	{
 		foreach(Material mat in objectsList)

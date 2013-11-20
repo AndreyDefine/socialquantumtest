@@ -11,7 +11,9 @@ using System.Collections;
 //singleton
 public class GuiLayer : Abstract {
 	
+	//для отслеживания изменения размеров экрана
 	private static float lastHeight = 0;
+	//singleton instance
 	private static GuiLayer instance=null;
 			
 	public static GuiLayer GetSharedGuiLayer()
@@ -35,8 +37,11 @@ public class GuiLayer : Abstract {
 		GUILayout.BeginArea(new Rect(10,10,Screen.width-10,30));
 		GUILayout.BeginHorizontal();
 		
-		GUILayout.Label("score", GUILayout.Width(100));
-		GUILayout.Label(GlobalOptions.score.ToString(), GUILayout.Width(200));
+		GUILayout.Label("score", GUILayout.Width(50));
+		GUILayout.Label(GlobalOptions.score.ToString(), GUILayout.Width(50));
+		
+		GUILayout.Label("difficulty", GUILayout.Width(50));
+		GUILayout.Label(GlobalOptions.difficultyLevel.ToString(), GUILayout.Width(200));
 				
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
@@ -53,11 +58,13 @@ public class GuiLayer : Abstract {
 		}
 	}
 	
+	//нажали на кнопку поменять сет
 	private void ChangeSet()
 	{
 		GameAgent.GetSharedGameAgent().ChangeSet();
 	}
 	
+	//нажали на кнопку сбросить игру
 	private void Reset()
 	{
 		GlobalOptions.score=0;

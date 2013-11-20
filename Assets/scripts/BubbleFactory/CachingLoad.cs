@@ -12,8 +12,10 @@ public class CachingLoad : MonoBehaviour {
 	public	ObjectLoadedCallbackDelegateWithCustomCallBack ObjectLoadedCallback;
 	public ObjectLoadedCallbackDelegate customcallback;
 	
+	//возвращаемый бандл
 	private AssetBundle bundle=null;
-
+	
+	//начать загрузку
 	public void StartLoading() {
 		StartCoroutine (DownloadAndCache());
 	}

@@ -40,8 +40,10 @@ public static class Cameras {
         }
 	}  
 	
+	//сбросить высчитанные значения
 	public static void ResetCameraStats()
 	{
+		//количество пикселей в юните
 		_pixelPerUnit=-1;
 	}
 }
