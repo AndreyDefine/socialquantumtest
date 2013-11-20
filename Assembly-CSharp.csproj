@@ -44,20 +44,20 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\scripts\Abstract.cs" />
      <Compile Include="Assets\scripts\BubbleFactory\AbstractElementFactory.cs" />
      <Compile Include="Assets\scripts\BubbleFactory\AbstractTag.cs" />
      <Compile Include="Assets\scripts\BubbleFactory\CachingLoad.cs" />
      <Compile Include="Assets\scripts\BubbleFactory\FallingBottom.cs" />
      <Compile Include="Assets\scripts\BubbleFactory\TextureFactory.cs" />
-     <Compile Include="Assets\scripts\Cameras.cs" />
-     <Compile Include="Assets\scripts\ExportAssetBundles.cs" />
-     <Compile Include="Assets\scripts\FpsDisplayer.cs" />
+     <Compile Include="Assets\scripts\GUI\FpsDisplayer.cs" />
+     <Compile Include="Assets\scripts\GUI\GuiLayer.cs" />
      <Compile Include="Assets\scripts\GameAgent.cs" />
-     <Compile Include="Assets\scripts\GlobalOptions.cs" />
-     <Compile Include="Assets\scripts\GuiLayer.cs" />
      <Compile Include="Assets\scripts\TouchDispatcher\TouchDispatcher.cs" />
      <Compile Include="Assets\scripts\TouchDispatcher\TouchTargetedDelegate.cs" />
+     <Compile Include="Assets\scripts\common\Abstract.cs" />
+     <Compile Include="Assets\scripts\common\Cameras.cs" />
+     <Compile Include="Assets\scripts\common\GlobalOptions.cs" />
+     <Compile Include="Assets\scripts\vsp\ExportAssetBundles.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,6 +11,9 @@ using System.Collections;
 //singleton
 public class GuiLayer : Abstract {
 	
+	//флаг загрузки
+	public bool flagLoading=true;
+	
 	//для отслеживания изменения размеров экрана
 	private static float lastHeight = 0;
 	//singleton instance
@@ -34,27 +37,34 @@ public class GuiLayer : Abstract {
 	
 	void OnGUI()
 	{
-		GUILayout.BeginArea(new Rect(10,10,Screen.width-10,30));
-		GUILayout.BeginHorizontal();
-		
-		GUILayout.Label("score", GUILayout.Width(50));
-		GUILayout.Label(GlobalOptions.score.ToString(), GUILayout.Width(50));
-		
-		GUILayout.Label("difficulty", GUILayout.Width(50));
-		GUILayout.Label(GlobalOptions.difficultyLevel.ToString(), GUILayout.Width(200));
-				
-		GUILayout.EndHorizontal();
-		GUILayout.EndArea();
-		
-		//buttons
-		if (GUI.Button(new Rect(Screen.width-120,Screen.height-60,100,40),"Reset"))
+		if(flagLoading)
 		{
-			Reset();
+			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 100, 20), "Loading...");
 		}
-		
-		if (GUI.Button(new Rect(Screen.width-120,Screen.height-60-50,100,40),"ChangeSet"))
+		else
 		{
-			ChangeSet();
+			GUILayout.BeginArea(new Rect(10,10,Screen.width-10,30));
+			GUILayout.BeginHorizontal();
+			
+			GUILayout.Label("score", GUILayout.Width(50));
+			GUILayout.Label(GlobalOptions.score.ToString(), GUILayout.Width(50));
+			
+			GUILayout.Label("difficulty", GUILayout.Width(50));
+			GUILayout.Label(GlobalOptions.difficultyLevel.ToString(), GUILayout.Width(200));
+					
+			GUILayout.EndHorizontal();
+			GUILayout.EndArea();
+			
+			//buttons
+			if (GUI.Button(new Rect(Screen.width-120,Screen.height-60,100,40),"Reset"))
+			{
+				Reset();
+			}
+			
+			if (GUI.Button(new Rect(Screen.width-120,Screen.height-60-50,100,40),"ChangeSet"))
+			{
+				ChangeSet();
+			}
 		}
 	}
 	

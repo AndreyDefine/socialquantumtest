@@ -62,6 +62,8 @@ public class FallingBottom : AbstractTag,TouchTargetedDelegate {
 	//сделать по поимке шарика эффект
 	void MakeCatchedAnimation()
 	{
+		//эффект может быть также получен из фабрики, в целом фабрика универсальна, 
+		//для простоты тестового задания, эффект ненужен
 		singleTransform.position=new Vector3(-9999,-9999,-9999);
 	}
 	

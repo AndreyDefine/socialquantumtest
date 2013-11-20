@@ -77,6 +77,7 @@ public class GameAgent : Abstract {
 	//callback from fabric preload objects
 	private void ObjectLoadedCallbackPreload(GameObject newObject,string instr)
 	{
+		GuiLayer.GetSharedGuiLayer().flagLoading=false;
 		flagRun=true;
 	}
 	
