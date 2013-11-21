@@ -31,6 +31,19 @@ public class AbstractElementFactory: Abstract{
 	//список вещей в свободном пуле
 	protected List<AbstractTag> objectsListToDel = new List<AbstractTag>();
 	
+	//фабрика должна быть монобехейвером, иначе она не сможет иметь полный доступ к управляемым элементам
+	//метод для получения фабрики (можно сделать фабрику и в едиторе)
+	public static AbstractElementFactory GetFabric(string inFabricName,string inpathToResources,string inpreloadNames)
+	{
+		AbstractElementFactory newinstance;
+		newinstance=(new GameObject()).AddComponent<AbstractElementFactory>();
+		newinstance.pathToResources=inpathToResources;
+		newinstance.preloadNames=inpreloadNames;
+		
+		newinstance.name=inFabricName;
+		return newinstance;	
+	}
+	
 	void Start(){
 		//предзагрузить имена вещей в пуле
 		if(preloadNames!="")

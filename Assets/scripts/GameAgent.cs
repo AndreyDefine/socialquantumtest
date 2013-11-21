@@ -7,9 +7,7 @@ using System;
 /// </summary>
 
 public class GameAgent : Abstract {
-	//factory
-	public GameObject BubleFactoryPrototype;
-	public GameObject TextureFactoryPrototype;
+	//выполняются ли действия в update
 	private bool flagRun=false;
 	
 	private AbstractElementFactory BubleFactory;
@@ -38,14 +36,11 @@ public class GameAgent : Abstract {
 		}
 		//очистим кеш, для теста!!!
 		Caching.CleanCache();
-		GameObject curObject;
 		//bubbles factory
-		curObject=Instantiate (BubleFactoryPrototype) as GameObject;
-		BubleFactory=curObject.GetComponent<AbstractElementFactory>();
+		BubleFactory=AbstractElementFactory.GetFabric("BubbleFactory","http://squeakyoak.com/files/tmp/socialquantum.unity3d","Bubble,Bubble2");
 		BubleFactory.PreloadPoolObjects(new ObjectLoadedCallbackDelegate(ObjectLoadedCallbackPreload));
 		//textureFactory
-		curObject=Instantiate (TextureFactoryPrototype) as GameObject;
-		TextureFactory1=curObject.GetComponent<TextureFactory>();
+		TextureFactory1=TextureFactory.GetFabric("TextureFactory1");
 		//create GuiLayer
 		GuiLayer.GetSharedGuiLayer();
 		

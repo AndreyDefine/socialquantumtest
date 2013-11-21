@@ -11,6 +11,16 @@ public class TextureFactory: Abstract{
 	protected List<Material> objectsList = new List<Material>();
 	private int []arrayOfSizes={32,64,128,256};
 	
+	//фабрика должна быть монобехейвером, иначе она не сможет иметь полный доступ к управляемым элементам
+	//метод для получения фабрики (можно сделать фабрику и в едиторе)
+	public static TextureFactory GetFabric(string inFabricName)
+	{
+		TextureFactory newinstance;
+		newinstance=(new GameObject()).AddComponent<TextureFactory>();
+		newinstance.name=inFabricName;
+		return newinstance;	
+	}
+	
 	//delete object
 	public void DeleteCurrent(Material inObject){
 		objectsList.Remove(inObject);
