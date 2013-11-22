@@ -72,8 +72,16 @@ public class GameAgent : Abstract {
 	//callback from fabric preload objects
 	private void ObjectLoadedCallbackPreload(GameObject newObject,string instr)
 	{
-		GuiLayer.GetSharedGuiLayer().flagLoading=false;
-		flagRun=true;
+		//если всё хорошо!
+		if(newObject)
+		{
+			GuiLayer.GetSharedGuiLayer().flagLoading=false;
+			flagRun=true;
+		}
+		else
+		{
+			GuiLayer.GetSharedGuiLayer().message="Error in Loading!!!";
+		}
 	}
 	
 	//callback from fabric

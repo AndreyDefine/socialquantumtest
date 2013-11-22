@@ -229,19 +229,24 @@ public class AbstractElementFactory: Abstract{
 	private void ObjectLoadedCallbackPreload(AssetBundle bundle,string instr,ObjectLoadedCallbackDelegate customcallback)
 	{
 		GameObject newObject=null;
-		for (int i=0; objectPreload!=null&&i<objectPreload.Length;i++){
-			newObject=Instantiate(bundle.Load(objectPreload[i])) as GameObject;
-			if(newObject)
-			{
-				addTagToObject(newObject);	
-				PutToFirstState(newObject.GetComponent<AbstractTag>());
-				newObject.name=objectPreload[i];
-				objectsListToDel.Add(newObject.GetComponent<AbstractTag>());
+		if(bundle)
+		{
+			Debug.Log ("good");
+			for (int i=0; objectPreload!=null&&i<objectPreload.Length;i++){
+				newObject=Instantiate(bundle.Load(objectPreload[i])) as GameObject;
+				if(newObject)
+				{
+					addTagToObject(newObject);	
+					PutToFirstState(newObject.GetComponent<AbstractTag>());
+					newObject.name=objectPreload[i];
+					objectsListToDel.Add(newObject.GetComponent<AbstractTag>());
+				}
 			}
+				
+			bundle.Unload(false);
 		}
-			
-		bundle.Unload(false);
-		customcallback(null,null);
+		//not best way to organize callback and response if all good or bad
+		customcallback(newObject,null);
 	}
 	
 	//возвратить объект, тому, кто его запросил

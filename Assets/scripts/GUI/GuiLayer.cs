@@ -14,6 +14,17 @@ public class GuiLayer : Abstract {
 	//флаг загрузки
 	public bool flagLoading=true;
 	
+	//сообщение в гуи
+	private string _message="Loading...";
+	public  string message {
+        get {
+            return _message;
+        }
+		set {
+			_message = value;
+		}
+    }
+	
 	//для отслеживания изменения размеров экрана
 	private static float lastHeight = 0;
 	//singleton instance
@@ -39,7 +50,7 @@ public class GuiLayer : Abstract {
 	{
 		if(flagLoading)
 		{
-			GUI.Label(new Rect(Screen.width/2, Screen.height/2, 100, 20), "Loading...");
+			GUI.Label(new Rect(Screen.width/2-100, Screen.height/2, 200, 20), message);
 		}
 		else
 		{
