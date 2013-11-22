@@ -231,7 +231,6 @@ public class AbstractElementFactory: Abstract{
 		GameObject newObject=null;
 		if(bundle)
 		{
-			Debug.Log ("good");
 			for (int i=0; objectPreload!=null&&i<objectPreload.Length;i++){
 				newObject=Instantiate(bundle.Load(objectPreload[i])) as GameObject;
 				if(newObject)
